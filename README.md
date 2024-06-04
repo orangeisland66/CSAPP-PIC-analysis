@@ -163,10 +163,10 @@ linux> gcc -Og -z lazy main2.c ./libvector.so -o prog2
 
 ![](https://md.0x7f.app/uploads/0bae7215-cb4f-46c1-889c-3c0fea217982.png)
 
-根据所学内容，如上图所示，当程序运行并第一次调用addvec时，进入plt表，但是此时并不会直接调用函数因为此时函数还没有加载到内存中，所以程序会调用dynamic linker将addvec代码段加载到内存中再进行调用。而当程序第二次调用addvec函数时，此时GOT对应的值已经修改为addvec的值，因此会直接调用addvec函数。带着预期结论接下来进行分析。
+根据所学内容，如上图所示，当程序运行并第一次调用addvec时，进入该程序对应的plt表，但是此时并不会直接调用函数因为此时函数还没有加载到内存中，所以程序会调用dynamic linker将addvec代码段加载到内存中再进行调用。而当程序第二次调用addvec函数时，此时GOT表内对应的值（即*GOT[i]）已经修改为addvec的地址，因此会直接调用addvec函数。带着预期结论接下来进行分析。
 
 **具体分析过程如下：**
-首先确定一下addvec@plt函数对应plt表的位置。
+首先确定一下prog2中addvec@plt函数对应plt表的位置。
 
 ![](https://md.0x7f.app/uploads/acc9d91d-9de2-41ff-92b6-5d67c5c1b323.png)
 可以看到addvec@plt对应PLT[1]
