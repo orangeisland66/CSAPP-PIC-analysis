@@ -107,13 +107,13 @@ linux> objdump -dx libvector.so
 语句1将相对地址为0x200fe0的值取出，即GOT[2]。
 
 ![](https://md.0x7f.app/uploads/0642ed17-80ac-4748-9df4-860062f95dfa.png)
-再回到运行时的程序，相对地址为0x200fe0对应运行时的绝对地址0x7ffff7dd1fe0，其存储的值为addcnt的地址，即0x7ffff7dd2024。
+当程序运行时，相对地址为0x200fe0对应运行时的绝对地址0x7ffff7dd1fe0，其存储的值为addcnt的地址，即0x7ffff7dd2024。
 
 <br>
 
-**2、语句2：mov  (%r8)，%eax 将addvec的值取出给eax寄存器。**
+**2、语句2：mov  (%r8)，%eax 将addcnt的值取出给eax寄存器。**
 
-分析：由于GOT表地址和addvec地址接近，故共用一张截图，可以看到0x7ffff7dd2024对应的值为0，说明此时addcnt的值为0。
+分析：由于GOT表地址和addcnt地址接近，故共用一张截图，可以看到0x7ffff7dd2024对应的值为0，说明此时addcnt的值为0。
 ![](https://md.0x7f.app/uploads/ac6de4f3-a47f-4b8f-b1ab-8c1930c44a43.png)
 
 
